@@ -1,0 +1,6 @@
+#phpstrom folder
+.idea
+
+# folder created at build
+db_data/
+mysqlconf/

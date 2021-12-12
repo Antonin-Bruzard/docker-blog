@@ -1,0 +1,27 @@
+version: '2'
+services:
+  php_apache:
+    container_name: php_apache
+    build:
+      context: ./
+      dockerfile: php_apache.dockerfile
+    depends_on:
+      - mysql
+    volumes:
+      - ../blog:/var/www/
+    working_dir: /var/www
+    ports:
+      - 8000:80
+  
+  mysql:
+    container_name: mysql
+    image: mysql
+    command: "--innodb_use_native_aio=0"
+    volumes:
+      - "./db_data:/var/lib/mysql"
+      - "./mysqlconf:/etc/mysql/conf.d"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker_database
+    ports:
+      - 3306:3306
